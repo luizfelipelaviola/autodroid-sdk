@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const USER_DATASET_GET_ONE_QUERY = gql(`
   query UserDataset($datasetId: String!) {

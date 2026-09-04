@@ -13,7 +13,7 @@ import {
   AdminProcessingUpdateMutationVariables,
   AdminProcessingCleanExpiredMutationVariables,
   AdminProcessingCleanExpiredMutation,
-} from '@api/gql/graphql';
+} from '@gql/graphql';
 
 import {
   ADMIN_PROCESSING_DELETE_MUTATION,

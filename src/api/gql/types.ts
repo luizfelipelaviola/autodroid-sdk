@@ -12,9 +12,13 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
   BigInt: { input: bigint; output: bigint; }
+  /** Cursor for pagination */
   ConnectionCursor: { input: any; output: any; }
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format. */
   DateTimeISO: { input: any; output: any; }
+  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { input: any; output: any; }
 };
 
@@ -342,6 +346,7 @@ export type MutationworkerProcessingRegisterSuccessArgs = {
 
 export type MutationworkerRegisterArgs = {
   internal_id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   registration_token: Scalars['String']['input'];
   signature: Scalars['String']['input'];
   system_info: Scalars['JSON']['input'];
@@ -350,6 +355,7 @@ export type MutationworkerRegisterArgs = {
 
 export type MutationworkerUpdateAccessTokenArgs = {
   internal_id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   refresh_token: Scalars['String']['input'];
   registration_token: Scalars['String']['input'];
   signature: Scalars['String']['input'];
@@ -360,6 +366,7 @@ export type MutationworkerUpdateAccessTokenArgs = {
 
 export type MutationworkerUpdateRefreshTokenArgs = {
   internal_id: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   refresh_token: Scalars['String']['input'];
   registration_token: Scalars['String']['input'];
   signature: Scalars['String']['input'];
@@ -417,6 +424,7 @@ export type Processing = {
   payload: Scalars['JSON']['output'];
   processor: Processor;
   processor_id: Scalars['String']['output'];
+  reported_at?: Maybe<Scalars['DateTimeISO']['output']>;
   result_file?: Maybe<File>;
   result_file_id?: Maybe<Scalars['String']['output']>;
   seq: Scalars['BigInt']['output'];
@@ -895,6 +903,7 @@ export type Worker = {
   internal_id: Scalars['String']['output'];
   last_seen_at?: Maybe<Scalars['DateTimeISO']['output']>;
   missing: Scalars['Boolean']['output'];
+  name?: Maybe<Scalars['String']['output']>;
   payload: Scalars['JSON']['output'];
   refresh_token: Scalars['String']['output'];
   refresh_token_expires_at: Scalars['DateTimeISO']['output'];
@@ -959,6 +968,13 @@ export type WorkerRegistrationTokenPaginationEdge = {
   cursor: Scalars['ConnectionCursor']['output'];
   node: WorkerRegistrationToken;
 };
+
+export type UserDatasetScalarsQueryVariables = Exact<{
+  datasetId: Scalars['String']['input'];
+}>;
+
+
+export type UserDatasetScalarsQuery = { __typename?: 'Query', userDataset: { __typename?: 'Dataset', id: string, seq: bigint, created_at: any } };
 
 export type AdminDatasetQueryVariables = Exact<{
   datasetId: Scalars['String']['input'];
@@ -1103,7 +1119,7 @@ export type AdminWorkerQueryVariables = Exact<{
 }>;
 
 
-export type AdminWorkerQuery = { __typename?: 'Query', adminWorker: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type AdminWorkerQuery = { __typename?: 'Query', adminWorker: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
 
 export type AdminWorkersQueryVariables = Exact<{
   userId?: InputMaybe<Scalars['String']['input']>;
@@ -1119,7 +1135,7 @@ export type AdminWorkersQueryVariables = Exact<{
 }>;
 
 
-export type AdminWorkersQuery = { __typename?: 'Query', adminWorkers: { __typename?: 'WorkerPaginationConnection', totalCount: number, edges: Array<{ __typename?: 'WorkerPaginationEdge', cursor: any, node: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
+export type AdminWorkersQuery = { __typename?: 'Query', adminWorkers: { __typename?: 'WorkerPaginationConnection', totalCount: number, edges: Array<{ __typename?: 'WorkerPaginationEdge', cursor: any, node: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } };
 
 export type AdminWorkerUpdateMutationVariables = Exact<{
   workerId: Scalars['String']['input'];
@@ -1127,14 +1143,14 @@ export type AdminWorkerUpdateMutationVariables = Exact<{
 }>;
 
 
-export type AdminWorkerUpdateMutation = { __typename?: 'Mutation', adminWorkerUpdate: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type AdminWorkerUpdateMutation = { __typename?: 'Mutation', adminWorkerUpdate: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
 
 export type AdminWorkerDeleteMutationVariables = Exact<{
   workerId: Scalars['String']['input'];
 }>;
 
 
-export type AdminWorkerDeleteMutation = { __typename?: 'Mutation', adminWorkerDelete: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type AdminWorkerDeleteMutation = { __typename?: 'Mutation', adminWorkerDelete: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
 
 export type AdminWorkerRegistrationTokenQueryVariables = Exact<{
   workerRegistrationTokenId: Scalars['String']['input'];
@@ -1383,12 +1399,12 @@ export type UserUpdateLearningDataMutation = { __typename?: 'Mutation', userUpda
 
 export type WorkerRegistrationTokenFragmentFragment = { __typename?: 'WorkerRegistrationToken', archived_at?: any | null, created_at: any, expires_at?: any | null, id: string, seq: bigint, is_unlimited_usage: boolean, token: string, updated_at: any, user_id: string };
 
-export type WorkerFragmentFragment = { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null };
+export type WorkerFragmentFragment = { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null };
 
 export type WorkerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WorkerQuery = { __typename?: 'Query', worker: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type WorkerQuery = { __typename?: 'Query', worker: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
 
 export type WorkerProcessingQueryVariables = Exact<{
   processingId: Scalars['String']['input'];
@@ -1450,16 +1466,18 @@ export type WorkerProcessingRegisterSuccessMutation = { __typename?: 'Mutation',
 
 export type WorkerRegisterMutationVariables = Exact<{
   internalId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   registrationToken: Scalars['String']['input'];
   signature: Scalars['String']['input'];
   systemInfo: Scalars['JSON']['input'];
 }>;
 
 
-export type WorkerRegisterMutation = { __typename?: 'Mutation', workerRegister: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type WorkerRegisterMutation = { __typename?: 'Mutation', workerRegister: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
 
 export type WorkerUpdateAccessTokenMutationVariables = Exact<{
   internalId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   refreshToken: Scalars['String']['input'];
   registrationToken: Scalars['String']['input'];
   signature: Scalars['String']['input'];
@@ -1472,6 +1490,7 @@ export type WorkerUpdateAccessTokenMutation = { __typename?: 'Mutation', workerU
 
 export type WorkerUpdateRefreshTokenMutationVariables = Exact<{
   internalId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
   refreshToken: Scalars['String']['input'];
   registrationToken: Scalars['String']['input'];
   signature: Scalars['String']['input'];
@@ -1480,4 +1499,4 @@ export type WorkerUpdateRefreshTokenMutationVariables = Exact<{
 }>;
 
 
-export type WorkerUpdateRefreshTokenMutation = { __typename?: 'Mutation', workerUpdateRefreshToken: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };
+export type WorkerUpdateRefreshTokenMutation = { __typename?: 'Mutation', workerUpdateRefreshToken: { __typename?: 'Worker', agent_info: any, archived_at?: any | null, created_at: any, id: string, seq: bigint, internal_id: string, name?: string | null, payload: any, refresh_token: string, refresh_token_expires_at: any, registration_token_id: string, signature: string, system_info: any, description?: string | null, tags?: string | null, last_seen_at?: any | null, updated_at: any, user_id: string, version?: string | null } };

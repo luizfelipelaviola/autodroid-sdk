@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const ADMIN_PROCESSOR_GET_ONE_QUERY = gql(`
   query AdminProcessor($processorId: String!) {

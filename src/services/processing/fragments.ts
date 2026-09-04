@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const PROCESSING_FRAGMENT = gql(`
   fragment ProcessingFragment on Processing {

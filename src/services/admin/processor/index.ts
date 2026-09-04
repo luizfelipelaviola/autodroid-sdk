@@ -13,7 +13,7 @@ import {
   AdminProcessorUpdateMutationVariables,
   AdminProcessorCreateMutation,
   AdminProcessorCreateMutationVariables,
-} from '@api/gql/graphql';
+} from '@gql/graphql';
 
 import {
   ADMIN_PROCESSOR_DELETE_MUTATION,

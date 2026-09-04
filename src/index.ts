@@ -34,7 +34,7 @@ class AutoDroidSdk {
   }
 }
 
-export * from '@gql/types';
+export * from '@gql/graphql';
 
 export { AutoDroidSdkResponseType } from '@utils/response.type';
 export { AutoDroidSdk };

@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const ADMIN_WORKER_GET_ONE_QUERY = gql(`
   query AdminWorker($workerId: String!) {

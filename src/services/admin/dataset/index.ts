@@ -13,7 +13,7 @@ import {
   AdminDatasetUpdateMutationVariables,
   AdminDatasetUpdateVisibilityMutation,
   AdminDatasetUpdateVisibilityMutationVariables,
-} from '@api/gql/graphql';
+} from '@gql/graphql';
 
 import {
   ADMIN_DATASET_DELETE_MUTATION,

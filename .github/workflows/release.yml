@@ -24,6 +24,19 @@ jobs:
       - name: Checkout to Branch
         uses: actions/checkout@v3
 
+      # scripts/checkSchemaFreshness.mjs (run by `yarn lint`) diffs this
+      # repo's checked-in schema.graphql against the backend's live schema —
+      # needs the sibling repo checked out at ../autodroid-api-gateway.
+      # CROSS_REPO_CHECKOUT_TOKEN must be a PAT (classic or fine-grained)
+      # with read access to MalwareDataLab/autodroid-api-gateway; the default
+      # GITHUB_TOKEN only has access to this repo.
+      - name: Checkout autodroid-api-gateway (for schema freshness check)
+        uses: actions/checkout@v3
+        with:
+          repository: MalwareDataLab/autodroid-api-gateway
+          token: ${{ secrets.CROSS_REPO_CHECKOUT_TOKEN }}
+          path: autodroid-api-gateway
+
       - name: Setup Node.js 20
         uses: actions/setup-node@v3
         with:
@@ -34,6 +47,8 @@ jobs:
 
       - name: Lint
         run: yarn lint
+        env:
+          BACKEND_SCHEMA_PATH: ${{ github.workspace }}/autodroid-api-gateway/packages/api/src/shared/infrastructure/graphql/generated/schema.gql
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets

@@ -9,7 +9,7 @@ import {
   HealthLivenessCheckQueryVariables,
   HealthReadinessCheckQuery,
   HealthReadinessCheckQueryVariables,
-} from '@api/gql/graphql';
+} from '@gql/graphql';
 
 import {
   HEALTH_CHECK_QUERY,

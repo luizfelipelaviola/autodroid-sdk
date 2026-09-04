@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const HEALTH_CHECK_QUERY = gql(`
   query HealthCheck {

@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const WORKER_REGISTRATION_TOKEN_FRAGMENT = gql(`
   fragment WorkerRegistrationTokenFragment on WorkerRegistrationToken {
@@ -22,6 +22,7 @@ export const WORKER_FRAGMENT = gql(`
     id
     seq
     internal_id
+    name
     payload
     refresh_token
     refresh_token_expires_at

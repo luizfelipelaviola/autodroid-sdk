@@ -26,7 +26,7 @@ import {
   WorkerUpdateAccessTokenMutationVariables,
   WorkerUpdateRefreshTokenMutation,
   WorkerUpdateRefreshTokenMutationVariables,
-} from '@api/gql/graphql';
+} from '@gql/graphql';
 
 import {
   WORKER_PROCESSING_CAPTURE_METRICS_FILE_UPLOAD_MUTATION,

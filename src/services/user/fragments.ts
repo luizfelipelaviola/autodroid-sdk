@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const USER_FRAGMENT = gql(`
   fragment UserFragment on User {

@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const FILE_FRAGMENT = gql(`
   fragment FileFragment on File {

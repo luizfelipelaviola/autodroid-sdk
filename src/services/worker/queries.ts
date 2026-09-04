@@ -1,4 +1,4 @@
-import { gql } from '@api/gql';
+import { gql } from '@gql';
 
 export const WORKER_QUERY = gql(`
   query Worker {
@@ -73,16 +73,16 @@ export const WORKER_PROCESSING_REGISTER_SUCCESS_MUTATION = gql(`
 `);
 
 export const WORKER_REGISTER_MUTATION = gql(`
-  mutation WorkerRegister($internalId: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!) {
-    workerRegister(internal_id: $internalId, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo) {
+  mutation WorkerRegister($internalId: String!, $name: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!) {
+    workerRegister(internal_id: $internalId, name: $name, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo) {
       ...WorkerFragment
     }
   }
 `);
 
 export const WORKER_UPDATE_ACCESS_TOKEN_MUTATION = gql(`
-  mutation WorkerUpdateAccessToken($internalId: String!, $refreshToken: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!, $workerId: String!) {
-    workerUpdateAccessToken(internal_id: $internalId, refresh_token: $refreshToken, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo, worker_id: $workerId) {
+  mutation WorkerUpdateAccessToken($internalId: String!, $name: String!, $refreshToken: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!, $workerId: String!) {
+    workerUpdateAccessToken(internal_id: $internalId, name: $name, refresh_token: $refreshToken, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo, worker_id: $workerId) {
       access_token
       access_token_expires_at
     }
@@ -90,8 +90,8 @@ export const WORKER_UPDATE_ACCESS_TOKEN_MUTATION = gql(`
 `);
 
 export const WORKER_UPDATE_REFRESH_TOKEN_MUTATION = gql(`
-  mutation WorkerUpdateRefreshToken($internalId: String!, $refreshToken: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!, $workerId: String!) {
-    workerUpdateRefreshToken(internal_id: $internalId, refresh_token: $refreshToken, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo, worker_id: $workerId) {
+  mutation WorkerUpdateRefreshToken($internalId: String!, $name: String!, $refreshToken: String!, $registrationToken: String!, $signature: String!, $systemInfo: JSON!, $workerId: String!) {
+    workerUpdateRefreshToken(internal_id: $internalId, name: $name, refresh_token: $refreshToken, registration_token: $registrationToken, signature: $signature, system_info: $systemInfo, worker_id: $workerId) {
       ...WorkerFragment
     }
   }
